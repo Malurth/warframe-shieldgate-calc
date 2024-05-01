@@ -120,6 +120,7 @@
 
   input[type="checkbox"] {
     margin: 0;
+    margin-bottom: 3px;
     vertical-align: middle;
   }
 
