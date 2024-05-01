@@ -40,12 +40,14 @@
   />
 
   <div>
-    <input
-      type="checkbox"
-      bind:checked={catalyzingShields}
-      on:change={calculateTime}
-    />
-    <label for="catalyzingShields">Catalyzing Shields</label>
+    <label>
+      <input
+        type="checkbox"
+        bind:checked={catalyzingShields}
+        on:change={calculateTime}
+      />
+      Catalyzing Shields
+    </label>
 
     {#if catalyzingShields}
       <label for="maxCatalyzeValue">(Max Shields:)</label>
