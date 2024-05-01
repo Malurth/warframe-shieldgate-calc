@@ -4,13 +4,20 @@
   let catalyzingShields = false;
   let maxCatalyzeValue = 100;
 
+  function limitCurrentShieldsToNewMax() {
+    if (catalyzingShields && inputShieldValue > maxCatalyzeValue) {
+      inputShieldValue = maxCatalyzeValue;
+    }
+  }
+
   function calculateTime() {
     if (catalyzingShields) {
-      const scaledTime = (maxCatalyzeValue - inputShieldValue) / 75;
-      outputTime = Math.max(1.3333 - scaledTime, 0.3333);
+      limitCurrentShieldsToNewMax();
+      const scaledTime = inputShieldValue / maxCatalyzeValue;
+      outputTime = Math.max(1.3333 * scaledTime, 0.3333);
     } else {
       if (inputShieldValue < 52.5) {
-        outputTime = (inputShieldValue / 180) + 1 / 3;
+        outputTime = inputShieldValue / 180 + 1 / 3;
       } else if (inputShieldValue > 1150) {
         outputTime = 2.5;
       } else {
@@ -18,25 +25,15 @@
       }
     }
   }
-
-  function toggleCatalyzing() {
-    if (!catalyzingShields) {
-      maxCatalyzeValue = 100;
-    }
-  }
 </script>
-
-<style>
-  /* Add your styles here */
-</style>
 
 <main>
   <h1>Shield Gate Timer Calculator</h1>
 
-  <label for="shieldValue">Enter Shield Value:</label>
+  <label for="shieldValue">Shield Amount:</label>
   <input type="number" bind:value={inputShieldValue} on:input={calculateTime} />
 
-  <label for="shieldSlider">Shield Value Slider:</label>
+  <!-- <label for="shieldSlider">Shield Value Slider:</label> -->
   <input
     type="range"
     id="shieldSlider"
@@ -50,12 +47,12 @@
     <input
       type="checkbox"
       bind:checked={catalyzingShields}
-      on:change={toggleCatalyzing}
+      on:change={calculateTime}
     />
     <label for="catalyzingShields">Catalyzing Shields</label>
 
     {#if catalyzingShields}
-      <label for="maxCatalyzeValue">Max:</label>
+      <label for="maxCatalyzeValue">(Max Shields:)</label>
       <input
         type="number"
         bind:value={maxCatalyzeValue}
@@ -64,9 +61,18 @@
     {/if}
   </div>
 
-  <button on:click={calculateTime}>Calculate Time</button>
+  <!-- <button on:click={calculateTime}>Calculate Time</button> -->
 
   {#if outputTime > 0}
-    <p>Output Time: {outputTime.toFixed(2)} seconds</p>
+    <p>Shield Gate Duration: {outputTime.toFixed(2)} seconds</p>
   {/if}
 </main>
+
+<style>
+  label {
+    display: inline-block;
+  }
+  #shieldSlider {
+    vertical-align: middle;
+  }
+</style>
