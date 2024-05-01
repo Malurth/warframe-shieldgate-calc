@@ -30,7 +30,7 @@
 </script>
 
 <main>
-  <h1>Shield Gate Timer Calculator</h1>
+  <h1>Shield Gate Calculator</h1>
 
   <div class="input-group">
     <label for="shieldValue">Shield Amount:</label>
