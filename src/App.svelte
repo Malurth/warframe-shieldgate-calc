@@ -26,20 +26,29 @@
 <main>
   <h1>Shield Gate Timer Calculator</h1>
 
-  <label for="shieldValue">Shield Amount:</label>
-  <input type="number" bind:value={inputShieldValue} on:input={calculateTime} />
+  <div class="input-group">
+    <label for="shieldValue">Shield Amount:</label>
+    <input
+      type="number"
+      id="shieldValue"
+      bind:value={inputShieldValue}
+      on:input={calculateTime}
+    />
+  </div>
 
-  <!-- <label for="shieldSlider">Shield Value Slider:</label> -->
-  <input
-    type="range"
-    id="shieldSlider"
-    min="0"
-    max={catalyzingShields ? maxCatalyzeValue : 1150}
-    bind:value={inputShieldValue}
-    on:input={calculateTime}
-  />
+  <div class="input-group">
+    <label for="shieldSlider">Shield Value:</label>
+    <input
+      type="range"
+      id="shieldSlider"
+      min="0"
+      max={catalyzingShields ? maxCatalyzeValue : 1150}
+      bind:value={inputShieldValue}
+      on:input={calculateTime}
+    />
+  </div>
 
-  <div>
+  <div class="input-group">
     <label>
       <input
         type="checkbox"
@@ -48,18 +57,16 @@
       />
       Catalyzing Shields
     </label>
-
     {#if catalyzingShields}
-      <label for="maxCatalyzeValue">(Max Shields:)</label>
+      <label for="maxCatalyzeValue">Max Shields:</label>
       <input
         type="number"
+        id="maxCatalyzeValue"
         bind:value={maxCatalyzeValue}
         on:input={calculateTime}
       />
     {/if}
   </div>
-
-  <!-- <button on:click={calculateTime}>Calculate Time</button> -->
 
   {#if outputTime > 0}
     <p>Shield Gate Duration: {outputTime.toFixed(2)} seconds</p>
@@ -67,10 +74,52 @@
 </main>
 
 <style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 20px;
+  }
+
+  main {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .input-group {
+    margin-bottom: 15px;
+  }
+
   label {
     display: inline-block;
+    margin-bottom: 5px;
   }
-  #shieldSlider {
+
+  input[type="number"],
+  input[type="range"] {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  input[type="checkbox"] {
+    margin-right: 5px;
     vertical-align: middle;
+  }
+
+  p {
+    font-size: 18px;
+    margin-top: 15px;
   }
 </style>
