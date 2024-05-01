@@ -4,15 +4,11 @@
   let catalyzingShields = false;
   let maxCatalyzeValue = 100;
 
-  function limitCurrentShieldsToNewMax() {
-    if (catalyzingShields && inputShieldValue > maxCatalyzeValue) {
-      inputShieldValue = maxCatalyzeValue;
-    }
-  }
-
   function calculateTime() {
     if (catalyzingShields) {
-      limitCurrentShieldsToNewMax();
+      if (inputShieldValue > maxCatalyzeValue) {
+        inputShieldValue = maxCatalyzeValue;
+      }
       const scaledTime = inputShieldValue / maxCatalyzeValue;
       outputTime = Math.max(1.3333 * scaledTime, 0.3333);
     } else {
