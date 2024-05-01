@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from "svelte";
   let inputShieldValue = 0;
   let outputTime = 0;
   let catalyzingShields = false;
@@ -21,6 +22,11 @@
       }
     }
   }
+
+  onMount(() => {
+    inputShieldValue = 0;
+    calculateTime();
+  });
 </script>
 
 <main>
@@ -57,7 +63,10 @@
       />
       Catalyzing Shields
     </label>
+
     {#if catalyzingShields}
+      <br />
+      <br />
       <label for="maxCatalyzeValue">Max Shields:</label>
       <input
         type="number"
@@ -68,23 +77,23 @@
     {/if}
   </div>
 
-  {#if outputTime > 0}
-    <p>Shield Gate Duration: {outputTime.toFixed(2)} seconds</p>
-  {/if}
+  <p>Shield Gate Duration: {outputTime.toFixed(2)} seconds</p>
 </main>
 
 <style>
-  body {
+  :global(body) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    padding: 20px;
+    background-color: #17191a;
+    color: #eee;
   }
 
   main {
     max-width: 600px;
     margin: 0 auto;
-    background-color: #fff;
+    background-color: #222627;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -109,8 +118,10 @@
     width: 100%;
     padding: 8px;
     border-radius: 4px;
-    border: 1px solid #ccc;
+    border: 1px solid #3a3e41;
     box-sizing: border-box;
+    background-color: #3a3e41;
+    color: #eee;
   }
 
   input[type="checkbox"] {
