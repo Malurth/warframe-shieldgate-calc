@@ -32,50 +32,43 @@
 <main>
   <h1>Shield Gate Calculator</h1>
 
-  <div class="input-group">
-    <label for="shieldValue">Shield Amount:</label>
+  <label for="shieldValue">Shield Amount:</label>
+  <input
+    type="number"
+    id="shieldValue"
+    bind:value={inputShieldValue}
+    on:input={calculateTime}
+  />
+
+  <input
+    type="range"
+    id="shieldSlider"
+    min="0"
+    max={catalyzingShields ? maxCatalyzeValue : 1150}
+    bind:value={inputShieldValue}
+    on:input={calculateTime}
+  />
+
+  <label>
+    <input
+      type="checkbox"
+      bind:checked={catalyzingShields}
+      on:change={calculateTime}
+    />
+    Catalyzing Shields
+  </label>
+  {#if catalyzingShields}
+    <br />
+    <br />
+    <label for="maxCatalyzeValue">Max Shields:</label>
     <input
       type="number"
-      id="shieldValue"
-      bind:value={inputShieldValue}
+      id="maxCatalyzeValue"
+      disabled={!catalyzingShields}
+      bind:value={maxCatalyzeValue}
       on:input={calculateTime}
     />
-  </div>
-
-  <div class="input-group">
-    <label for="shieldSlider">Shield Value:</label>
-    <input
-      type="range"
-      id="shieldSlider"
-      min="0"
-      max={catalyzingShields ? maxCatalyzeValue : 1150}
-      bind:value={inputShieldValue}
-      on:input={calculateTime}
-    />
-  </div>
-
-  <div class="input-group">
-    <label>
-      <input
-        type="checkbox"
-        bind:checked={catalyzingShields}
-        on:change={calculateTime}
-      />
-      Catalyzing Shields
-    </label>
-
-    {#if catalyzingShields}
-      <br />
-      <br />
-      <label for="maxCatalyzeValue">Max Shields:</label>
-      <input
-        type="number"
-        id="maxCatalyzeValue"
-        bind:value={maxCatalyzeValue}
-        on:input={calculateTime}
-      />
-    {/if}
-  </div>
+  {/if}
 
   <p>Shield Gate Duration: {outputTime.toFixed(2)} seconds</p>
 </main>
@@ -91,10 +84,11 @@
   }
 
   main {
-    max-width: 600px;
+    max-width: 400px;
     margin: 0 auto;
     background-color: #222627;
-    padding: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
@@ -104,13 +98,9 @@
     margin-bottom: 20px;
   }
 
-  .input-group {
-    margin-bottom: 15px;
-  }
-
   label {
     display: inline-block;
-    margin-bottom: 5px;
+    vertical-align: middle;
   }
 
   input[type="number"],
@@ -124,8 +114,12 @@
     color: #eee;
   }
 
+  input[type="number"]:disabled {
+    color: #909199;
+  }
+
   input[type="checkbox"] {
-    margin-right: 5px;
+    margin: 0;
     vertical-align: middle;
   }
 
