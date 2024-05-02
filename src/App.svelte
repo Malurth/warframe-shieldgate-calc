@@ -13,7 +13,7 @@
       const scaledTime = inputShieldValue / maxCatalyzeValue;
       outputTime = Math.max(1.3333 * scaledTime, 0.3333);
       if (isNaN(outputTime)) {
-        outputTime = 0.33;
+        outputTime = 0;
       }
     } else {
       if (inputShieldValue < 52.5) {
@@ -88,6 +88,11 @@
     Shield Gate Duration: <span class="outputNum">{outputTime.toFixed(2)}</span>
     seconds
   </p>
+  {#if !(maxCatalyzeValue > 0)}
+    <div class="warntext">
+      If you have no shields, you will not get a shieldgate.
+    </div>
+  {/if}
 </main>
 
 <style>
@@ -107,7 +112,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 10px;
-    max-width: 400px;
+    max-width: 298px;
     margin: 0 auto;
     background-color: #222627;
     padding-right: 40px;
@@ -116,6 +121,12 @@
     padding-bottom: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .warntext {
+    text-align: center;
+    font-size: 12px;
+    color: red;
   }
 
   .outputNum {
