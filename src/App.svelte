@@ -88,7 +88,7 @@
     Shield Gate Duration: <span class="outputNum">{outputTime.toFixed(2)}</span>
     seconds
   </p>
-  {#if !(maxCatalyzeValue > 0)}
+  {#if outputTime == 0}
     <div class="warntext">
       If you have no shields, you will not get a shieldgate.
     </div>
