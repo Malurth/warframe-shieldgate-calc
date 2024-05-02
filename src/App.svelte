@@ -12,6 +12,9 @@
       }
       const scaledTime = inputShieldValue / maxCatalyzeValue;
       outputTime = Math.max(1.3333 * scaledTime, 0.3333);
+      if (isNaN(outputTime)) {
+        outputTime = 0.33;
+      }
     } else {
       if (inputShieldValue < 52.5) {
         outputTime = inputShieldValue / 180 + 1 / 3;
