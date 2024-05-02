@@ -23,9 +23,18 @@
     }
   }
 
+  function handleKeyPress(e) {
+    if (e.target.tagName === "INPUT" && e.target.type === "number") {
+      if ("0123456789".indexOf(String.fromCharCode(e.which)) === -1) {
+        e.preventDefault();
+      }
+    }
+  }
+
   onMount(() => {
     inputShieldValue = 0;
     calculateTime();
+    document.addEventListener("keypress", handleKeyPress);
   });
 </script>
 
@@ -35,6 +44,7 @@
   <label for="shieldValue">Shield Amount:</label>
   <input
     type="number"
+    inputmode="numeric"
     id="shieldValue"
     bind:value={inputShieldValue}
     on:input={calculateTime}
@@ -63,6 +73,7 @@
     <label for="maxCatalyzeValue">Max Shields:</label>
     <input
       type="number"
+      inputmode="numeric"
       id="maxCatalyzeValue"
       disabled={!catalyzingShields}
       bind:value={maxCatalyzeValue}
