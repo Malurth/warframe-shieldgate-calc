@@ -50,7 +50,7 @@
       inputArmorValue *= 1 - corroStacksToStripPercent(corroStacks);
     }
     inputArmorValue = CP ? inputArmorValue * 0.82 : inputArmorValue;
-    inputArmorValue = Math.round(inputArmorValue);
+    inputArmorValue = Math.round(inputArmorValue * 100) / 100;
     calculateDR();
   }
 
@@ -66,7 +66,7 @@
 
   function handleKeyPress(e) {
     if (e.target.tagName === "INPUT" && e.target.type === "number") {
-      if ("0123456789".indexOf(String.fromCharCode(e.which)) === -1) {
+      if ("0123456789.".indexOf(String.fromCharCode(e.which)) === -1) {
         e.preventDefault();
       }
     }
