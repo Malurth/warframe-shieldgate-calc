@@ -4,6 +4,7 @@
   let inputArmorValue = 0;
   let outputTime = 0;
   let outputDR = 0;
+  let outputMult = 10;
   let heat = false;
   let CP = false;
   let corroStacks = 0;
@@ -57,11 +58,13 @@
   function calculateDR() {
     if (inputArmorValue == 0) {
       outputDR = 0;
+      outputMult = 10;
       return;
     } else if (inputArmorValue > 2700) {
       inputArmorValue = 2700;
     }
-    outputDR = Math.sqrt(inputArmorValue * 3);
+    outputDR = Math.round(Math.sqrt(inputArmorValue * 3) * 100) / 100;
+    outputMult = Math.round((100 - outputDR) * 10) / 100;
   }
 
   function handleKeyPress(e) {
@@ -174,7 +177,10 @@
     </div>
 
     <p>
-      Enemy DR: <span class="outputNum">{outputDR.toFixed(2)}</span>%
+      Enemy DR: <span class="outputNum">{outputDR}</span>%
+    </p>
+    <p class="multText">
+      (that's a {outputMult}x damage multiplier compared to 90%!)
     </p>
   </section>
 </main>
@@ -230,6 +236,13 @@
     text-align: center;
     font-size: 12px;
     color: red;
+  }
+
+  .multText {
+    color: #909199;
+    font-size: 12px;
+    padding: 0;
+    margin-top: 0;
   }
 
   .outputNum {
