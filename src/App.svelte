@@ -110,8 +110,6 @@
       Catalyzing Shields
     </label>
     {#if catalyzingShields}
-      <br />
-      <br />
       <label for="maxCatalyzeValue">Max Shields:</label>
       <input
         type="number"
