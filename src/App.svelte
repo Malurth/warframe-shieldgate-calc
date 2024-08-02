@@ -153,25 +153,28 @@
       bind:value={inputArmorValue}
       on:input={calculateDR}
     />
-    <div>
-      Quick Max Armor Calc:
-      <button on:click={quickArmorCalc}>Quick Calc</button>
+    <div class="quickcalc">
+      <div>
+        Quick Max Armor Calc:
+        <button on:click={quickArmorCalc}>Quick Calc</button>
+      </div>
+      <div>
+        Corrosive: <select bind:value={corroStacks}>
+          {#each corroStackList as number}
+            <option value={number}>{number}</option>
+          {/each}
+        </select>
+        <label>
+          <input type="checkbox" bind:checked={heat} />
+          Heat
+        </label>
+        <label>
+          <input type="checkbox" bind:checked={CP} />
+          CP
+        </label>
+      </div>
     </div>
-    <div>
-      Corrosive: <select bind:value={corroStacks}>
-        {#each corroStackList as number}
-          <option value={number}>{number}</option>
-        {/each}
-      </select>
-      <label>
-        <input type="checkbox" bind:checked={heat} />
-        Heat
-      </label>
-      <label>
-        <input type="checkbox" bind:checked={CP} />
-        CP
-      </label>
-    </div>
+
     <p>
       Enemy DR: <span class="outputNum">{outputDR.toFixed(2)}</span>%
     </p>
@@ -211,6 +214,16 @@
     padding-left: 40px;
     padding-top: 20px;
     padding-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .quickcalc {
+    border: 4px rgb(84, 80, 80);
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    background-color: #323232;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
