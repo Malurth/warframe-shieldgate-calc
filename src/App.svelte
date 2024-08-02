@@ -5,7 +5,8 @@
   let outputTime = 0;
   let outputDR = 0;
   let heat = false;
-  let corroStacks = 10;
+  let CP = false;
+  let corroStacks = 0;
   const corroStackList = Array.from({ length: 15 }, (_, i) => i);
   let catalyzingShields = false;
   let maxCatalyzeValue = 100;
@@ -48,6 +49,7 @@
     if (corroStacks > 0) {
       inputArmorValue *= 1 - corroStacksToStripPercent(corroStacks);
     }
+    inputArmorValue = CP ? inputArmorValue * 0.82 : inputArmorValue;
     inputArmorValue = Math.round(inputArmorValue);
     calculateDR();
   }
@@ -151,7 +153,10 @@
       bind:value={inputArmorValue}
       on:input={calculateDR}
     />
-    Quick Max Armor Calc:
+    <div>
+      Quick Max Armor Calc:
+      <button on:click={quickArmorCalc}>Quick Calc</button>
+    </div>
     <div>
       Corrosive: <select bind:value={corroStacks}>
         {#each corroStackList as number}
@@ -162,7 +167,10 @@
         <input type="checkbox" bind:checked={heat} />
         Heat
       </label>
-      <button on:click={quickArmorCalc}>Quick Calc</button>
+      <label>
+        <input type="checkbox" bind:checked={CP} />
+        CP
+      </label>
     </div>
     <p>
       Enemy DR: <span class="outputNum">{outputDR.toFixed(2)}</span>%
