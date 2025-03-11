@@ -7,7 +7,7 @@ import livereload from "rollup-plugin-livereload";
 import css from "rollup-plugin-css-only";
 
 const production = !process.env.ROLLUP_WATCH;
-const base = production ? "/warframe-shieldgate-calc" : "";
+const base = production ? "/warframe-calcs" : "";
 
 function serve() {
   let server;
