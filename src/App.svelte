@@ -87,73 +87,32 @@
     <h1>Shield Gate Calculator</h1>
 
     <label for="shieldValue">Shield Amount:</label>
-    <input
-      type="number"
-      inputmode="numeric"
-      id="shieldValue"
-      bind:value={inputShieldValue}
-      on:input={calculateTime}
-    />
+    <input type="number" inputmode="numeric" id="shieldValue" bind:value={inputShieldValue} on:input={calculateTime} />
 
-    <input
-      type="range"
-      id="shieldSlider"
-      min="0"
-      max={catalyzingShields ? maxCatalyzeValue : 1150}
-      bind:value={inputShieldValue}
-      on:input={calculateTime}
-    />
+    <input type="range" id="shieldSlider" min="0" max={catalyzingShields ? maxCatalyzeValue : 1150} bind:value={inputShieldValue} on:input={calculateTime} />
 
     <label>
-      <input
-        type="checkbox"
-        bind:checked={catalyzingShields}
-        on:change={calculateTime}
-      />
+      <input type="checkbox" bind:checked={catalyzingShields} on:change={calculateTime} />
       Catalyzing Shields
     </label>
     {#if catalyzingShields}
       <label for="maxCatalyzeValue">Max Shields:</label>
-      <input
-        type="number"
-        inputmode="numeric"
-        id="maxCatalyzeValue"
-        disabled={!catalyzingShields}
-        bind:value={maxCatalyzeValue}
-        on:input={calculateTime}
-      />
+      <input type="number" inputmode="numeric" id="maxCatalyzeValue" disabled={!catalyzingShields} bind:value={maxCatalyzeValue} on:input={calculateTime} />
     {/if}
 
     <p>
-      Shield Gate Duration: <span class="outputNum"
-        >{outputTime.toFixed(2)}</span
-      >
+      Shield Gate Duration: <span class="outputNum">{outputTime.toFixed(2)}</span>
       seconds
     </p>
     {#if outputTime == 0}
-      <div class="warntext">
-        If you have no shields, you will not get a shieldgate.
-      </div>
+      <div class="warntext">If you have no shields, you will not get a shieldgate.</div>
     {/if}
   </section>
   <section>
     <h1>Enemy Armor -> DR% Calculator</h1>
     <label for="armorValue">Armor Amount:</label>
-    <input
-      type="number"
-      inputmode="numeric"
-      id="armorValue"
-      bind:value={inputArmorValue}
-      on:input={calculateDR}
-    />
-    <input
-      type="range"
-      id="shieldSlider"
-      min="0"
-      max="2700"
-      bind:value={inputArmorValue}
-      on:input={calculateDR}
-    />
+    <input type="number" inputmode="numeric" id="armorValue" bind:value={inputArmorValue} on:input={calculateDR} />
+    <input type="range" id="shieldSlider" min="0" max="2700" bind:value={inputArmorValue} on:input={calculateDR} />
     <div class="quickcalc">
       <div>
         Quick Max Armor Calc:
